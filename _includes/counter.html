@@ -1,0 +1,26 @@
+<!-- 페이지뷰 카운터 (Supabase) -->
+<script>
+(function(){
+  // 관리자 페이지, 404 등은 제외
+  if(location.pathname==='/admin.html') return;
+  
+  var SB_URL='https://wblffwhxaqxtqjccmwig.supabase.co';
+  var SB_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndibGZmd2h4YXF4dHFqY2Ntd2lnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc4OTQzMDcsImV4cCI6MjA5MzQ3MDMwN30.9uGXG1zw3bF5ojMcfQnPr8zsirn3WejIjK60XOZfAcg';
+
+  fetch(SB_URL+'/rest/v1/page_views',{
+    method:'POST',
+    headers:{
+      'Content-Type':'application/json',
+      'apikey':SB_KEY,
+      'Authorization':'Bearer '+SB_KEY,
+      'Prefer':'return=minimal'
+    },
+    body:JSON.stringify({
+      page_path: location.pathname,
+      page_title: document.title||'',
+      referrer: document.referrer||'',
+      user_agent: navigator.userAgent||''
+    })
+  }).catch(function(){});
+})();
+</script>

@@ -137,6 +137,28 @@ mark{background:#fff59d;border-radius:2px;padding:0 1px}
   .tab-pane{padding:14px 15px}
   .card-bottom{flex-direction:column;align-items:flex-start}
 }
+
+/* ── Traffic Dashboard ── */
+.tf-summary{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px}
+.tf-sum-card{background:#fff;border-radius:12px;padding:14px 18px;box-shadow:0 1px 3px rgba(0,0,0,.05);flex:1;min-width:120px;border-left:3px solid #2563a8}
+.tf-sum-lbl{font-size:.72rem;color:#999;margin-bottom:4px}
+.tf-sum-val{font-size:1.4rem;font-weight:700;color:#1a1a1a}
+.tf-sum-sub{font-size:.7rem;color:#bbb;margin-top:2px}
+.tf-section{background:#fff;border-radius:12px;padding:16px 18px;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:12px}
+.tf-sec-title{font-size:.85rem;font-weight:700;color:#555;margin-bottom:12px}
+.tf-chart{display:flex;align-items:flex-end;gap:6px;height:120px;padding-top:8px}
+.tf-bar-wrap{flex:1;display:flex;flex-direction:column;align-items:center;height:100%}
+.tf-bar{width:100%;border-radius:4px 4px 0 0;background:#c7d9f5;transition:height .3s;min-height:2px}
+.tf-bar-today{background:#2563a8}
+.tf-bar-lbl{font-size:.62rem;color:#bbb;margin-top:4px;white-space:nowrap}
+.tf-bar-cnt{font-size:.66rem;color:#666;margin-bottom:3px;font-weight:600}
+.tf-row{display:flex;justify-content:space-between;align-items:center;padding:7px 0;border-bottom:1px solid #f5f5f5;font-size:.82rem}
+.tf-row:last-child{border:none}
+.tf-row-rank{color:#ccc;font-size:.72rem;width:24px;flex-shrink:0}
+.tf-row-path{flex:1;color:#1a1a1a;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tf-row-cnt{color:#2563a8;font-weight:600;flex-shrink:0;margin-left:8px}
+.tf-row-ref{color:#666;flex:1}
+.tf-row-time{color:#bbb;font-size:.72rem;flex-shrink:0;margin-left:8px}
 </style>
 </head>
 <body>
@@ -211,14 +233,34 @@ mark{background:#fff59d;border-radius:2px;padding:0 1px}
 
   <!-- ── 탭2: 트래픽 분석 ── -->
   <div id="tp-traffic" class="tab-pane">
-    <div class="placeholder">
-      <div>
-        <div class="ph-icon">📊</div>
-        <div class="ph-title">Supabase 카운터 연동 후 활성화 예정</div>
-        <div class="ph-list">
-          · 일별 방문 추이 &nbsp;·&nbsp; 유입 경로 분석 &nbsp;·&nbsp; 인기 글 TOP 10<br>
-          · 브라우저/기기 분포 &nbsp;·&nbsp; 시간대별 방문 &nbsp;·&nbsp; CTA 클릭 현황
-        </div>
+    <div id="tf-loading" style="text-align:center;padding:40px;color:#bbb">불러오는 중...</div>
+    <div id="tf-content" style="display:none">
+
+      <!-- 오늘/7일/30일 요약 -->
+      <div class="tf-summary" id="tf-summary"></div>
+
+      <!-- 7일 일별 추이 차트 -->
+      <div class="tf-section">
+        <div class="tf-sec-title">📈 일별 방문 (최근 7일)</div>
+        <div class="tf-chart" id="tf-chart"></div>
+      </div>
+
+      <!-- 인기 글 TOP 10 -->
+      <div class="tf-section">
+        <div class="tf-sec-title">🔥 인기 글 TOP 10</div>
+        <div id="tf-top"></div>
+      </div>
+
+      <!-- 유입 경로 -->
+      <div class="tf-section">
+        <div class="tf-sec-title">🔗 유입 경로</div>
+        <div id="tf-ref"></div>
+      </div>
+
+      <!-- 최근 방문 -->
+      <div class="tf-section">
+        <div class="tf-sec-title">🕐 최근 방문 20건</div>
+        <div id="tf-recent"></div>
       </div>
     </div>
   </div>
@@ -345,6 +387,7 @@ function showTab(name) {
     document.getElementById('tb-'+t).classList.toggle('active', t===name);
     document.getElementById('tp-'+t).classList.toggle('active', t===name);
   });
+  if(name==='traffic') loadTraffic();
 }
 
 // ══════════════════════════════
@@ -548,7 +591,152 @@ function toast(msg) {
   t.textContent=msg;t.classList.add('show');
   clearTimeout(t._t);t._t=setTimeout(()=>t.classList.remove('show'),2100);
 }
+
+// ══════════════════════════════
+//  TRAFFIC DASHBOARD (Supabase)
+// ══════════════════════════════
+const SB_URL='https://wblffwhxaqxtqjccmwig.supabase.co';
+const SB_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndibGZmd2h4YXF4dHFqY2Ntd2lnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc4OTQzMDcsImV4cCI6MjA5MzQ3MDMwN30.9uGXG1zw3bF5ojMcfQnPr8zsirn3WejIjK60XOZfAcg';
+
+async function sbFetch(query) {
+  const r = await fetch(SB_URL+'/rest/v1/'+query, {
+    headers: { 'apikey':SB_KEY, 'Authorization':'Bearer '+SB_KEY }
+  });
+  if(!r.ok) throw new Error(r.status);
+  return r.json();
+}
+
+function isoDate(d) { return d.toISOString().slice(0,10); }
+function shortDate(s) { return s.slice(5).replace('-','/'); }
+
+async function loadTraffic() {
+  try {
+    const now = new Date();
+    const d7  = new Date(now); d7.setDate(d7.getDate()-7);
+    const d30 = new Date(now); d30.setDate(d30.getDate()-30);
+    const todayStr = isoDate(now);
+    const d7Str  = isoDate(d7);
+    const d30Str = isoDate(d30);
+
+    // 30일 전체 데이터 조회
+    const rows = await sbFetch(
+      'page_views?select=page_path,page_title,referrer,created_at&created_at=gte.'+d30Str+'T00:00:00&order=created_at.desc&limit=5000'
+    );
+
+    if(!rows.length) {
+      document.getElementById('tf-loading').innerHTML='<div style="text-align:center;padding:40px;color:#bbb">📊 아직 데이터가 없습니다.<br><span style="font-size:.78rem">블로그에 방문이 기록되면 여기에 표시됩니다.</span></div>';
+      return;
+    }
+
+    // ── 요약 카드 ──
+    const todayCnt = rows.filter(r=>r.created_at.slice(0,10)===todayStr).length;
+    const d7Cnt = rows.filter(r=>r.created_at.slice(0,10)>=d7Str).length;
+    const d30Cnt = rows.length;
+
+    document.getElementById('tf-summary').innerHTML = `
+      <div class="tf-sum-card" style="border-left-color:#2563a8">
+        <div class="tf-sum-lbl">오늘</div>
+        <div class="tf-sum-val">${n(todayCnt)}</div>
+        <div class="tf-sum-sub">페이지뷰</div>
+      </div>
+      <div class="tf-sum-card" style="border-left-color:#388e3c">
+        <div class="tf-sum-lbl">최근 7일</div>
+        <div class="tf-sum-val">${n(d7Cnt)}</div>
+        <div class="tf-sum-sub">페이지뷰</div>
+      </div>
+      <div class="tf-sum-card" style="border-left-color:#e65100">
+        <div class="tf-sum-lbl">최근 30일</div>
+        <div class="tf-sum-val">${n(d30Cnt)}</div>
+        <div class="tf-sum-sub">페이지뷰</div>
+      </div>
+      <div class="tf-sum-card" style="border-left-color:#4a148c">
+        <div class="tf-sum-lbl">일 평균 (7일)</div>
+        <div class="tf-sum-val">${Math.round(d7Cnt/7)}</div>
+        <div class="tf-sum-sub">페이지뷰</div>
+      </div>
+    `;
+
+    // ── 7일 일별 차트 ──
+    const dayCounts = {};
+    for(let i=6;i>=0;i--){
+      const dd=new Date(now);dd.setDate(dd.getDate()-i);
+      dayCounts[isoDate(dd)]=0;
+    }
+    rows.forEach(r=>{
+      const dk=r.created_at.slice(0,10);
+      if(dk in dayCounts) dayCounts[dk]++;
+    });
+    const vals=Object.values(dayCounts);
+    const maxV=Math.max(...vals,1);
+    document.getElementById('tf-chart').innerHTML = Object.entries(dayCounts).map(([d,c],i)=>{
+      const pct=Math.round(c/maxV*100);
+      const isToday=d===todayStr;
+      return `<div class="tf-bar-wrap">
+        <div class="tf-bar-cnt">${c}</div>
+        <div style="flex:1;display:flex;align-items:flex-end;width:100%">
+          <div class="tf-bar${isToday?' tf-bar-today':''}" style="height:${Math.max(pct,3)}%"></div>
+        </div>
+        <div class="tf-bar-lbl">${shortDate(d)}${isToday?' ●':''}</div>
+      </div>`;
+    }).join('');
+
+    // ── 인기 글 TOP 10 ──
+    const pathCounts = {};
+    rows.forEach(r=>{
+      const p=r.page_path;
+      if(!pathCounts[p]) pathCounts[p]={count:0,title:r.page_title||p};
+      pathCounts[p].count++;
+    });
+    const topPages = Object.entries(pathCounts)
+      .sort((a,b)=>b[1].count-a[1].count)
+      .slice(0,10);
+    document.getElementById('tf-top').innerHTML = topPages.map(([path,d],i)=>
+      `<div class="tf-row">
+        <span class="tf-row-rank">${i+1}</span>
+        <span class="tf-row-path" title="${e(path)}">${e(d.title||path)}</span>
+        <span class="tf-row-cnt">${n(d.count)}</span>
+      </div>`
+    ).join('') || '<div style="color:#bbb;font-size:.82rem;padding:8px">데이터 없음</div>';
+
+    // ── 유입 경로 ──
+    const refCounts = {};
+    rows.forEach(r=>{
+      let ref = r.referrer||'(직접 방문)';
+      try { if(ref!=='(직접 방문)') ref = new URL(ref).hostname; } catch{}
+      if(!refCounts[ref]) refCounts[ref]=0;
+      refCounts[ref]++;
+    });
+    const topRefs = Object.entries(refCounts)
+      .sort((a,b)=>b[1]-a[1])
+      .slice(0,8);
+    document.getElementById('tf-ref').innerHTML = topRefs.map(([ref,cnt])=>
+      `<div class="tf-row">
+        <span class="tf-row-ref">${e(ref)}</span>
+        <span class="tf-row-cnt">${n(cnt)}</span>
+      </div>`
+    ).join('') || '<div style="color:#bbb;font-size:.82rem;padding:8px">데이터 없음</div>';
+
+    // ── 최근 방문 20건 ──
+    document.getElementById('tf-recent').innerHTML = rows.slice(0,20).map(r=>{
+      const t=new Date(r.created_at);
+      const ts=String(t.getMonth()+1).padStart(2,'0')+'/'+String(t.getDate()).padStart(2,'0')+' '+String(t.getHours()).padStart(2,'0')+':'+String(t.getMinutes()).padStart(2,'0');
+      return `<div class="tf-row">
+        <span class="tf-row-path" title="${e(r.page_path)}">${e(r.page_title||r.page_path)}</span>
+        <span class="tf-row-time">${ts}</span>
+      </div>`;
+    }).join('') || '<div style="color:#bbb;font-size:.82rem;padding:8px">데이터 없음</div>';
+
+    // 완료
+    document.getElementById('tf-loading').style.display='none';
+    document.getElementById('tf-content').style.display='block';
+
+  } catch(err) {
+    document.getElementById('tf-loading').innerHTML=
+      '<div style="color:#e53935;padding:24px;text-align:center;font-size:.88rem">⚠️ 트래픽 데이터 로드 실패<br><span style="color:#999;font-size:.78rem">'+e(String(err))+'</span></div>';
+  }
+}
 {% endraw %}
 </script>
 </body>
 </html>
+
