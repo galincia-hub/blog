@@ -20,6 +20,8 @@ tags: [알PDF, PDF 변환, PDF 편집, 무료 PDF]
 | 텍스트·이미지 편집 | - | ✓ |
 | PDF 압축 | ✓ | ✓ |
 
+{% include cta-button.html url="https://www.altools.co.kr/Product/ALPdf.aspx" text="알PDF 공식 다운로드" type="download" affiliate="altools" %}
+
 ## 다운로드 방법
 
 1. 알소프트 공식 사이트(altools.co.kr)에 접속합니다.

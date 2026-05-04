@@ -211,6 +211,28 @@ img { max-width: 100%; height: auto; display: block; }
 .cat-health  .category-hero { background: linear-gradient(135deg, #880E4F, #E91E63); }
 .cat-review  .category-hero { background: linear-gradient(135deg, #4A148C, #9C27B0); }
 
+/* CTA Button */
+.cta-wrap { margin: 28px 0; text-align: center; }
+.cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 32px;
+  border-radius: 10px;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #fff;
+  text-decoration: none;
+  transition: filter 0.15s, transform 0.1s;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+.cta-btn:hover { filter: brightness(1.1); transform: translateY(-1px); color: #fff; }
+.cta-btn:active { transform: translateY(0); }
+.cta-download { background: linear-gradient(135deg, #1976D2, #1565C0); }
+.cta-link     { background: linear-gradient(135deg, #388E3C, #2E7D32); }
+.cta-phone    { background: linear-gradient(135deg, #F57C00, #E65100); }
+.cta-icon { font-size: 1.2rem; }
+
 /* Footer */
 .site-footer {
   border-top: 1px solid #f0f0f0;

@@ -18,6 +18,8 @@ tags: [한컴오피스, 한글, 다운로드, 무료]
 | 한컴오피스 체험판 | 무료 (30일) | 전 기능 사용 가능 |
 | 한컴오피스 정품 | 유료 | 영구 라이선스 |
 
+{% include cta-button.html url="https://www.hancom.com/cs_center/csDownload.do" text="한글 뷰어 공식 다운로드" type="download" affiliate="hancom" %}
+
 ## 한글 뷰어 다운로드 방법
 
 1. 한컴 공식 사이트에 접속합니다.

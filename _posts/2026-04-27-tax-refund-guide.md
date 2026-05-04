@@ -16,6 +16,8 @@ tags: [세금 환급, 환급금 조회, 홈택스, 국세청]
 - 부가가치세 환급 (사업자)
 - 원천징수 과다 납부
 
+{% include cta-button.html url="https://www.hometax.go.kr" text="홈택스 환급금 조회 바로가기" type="link" %}
+
 ## 홈택스에서 환급금 조회 방법
 
 1. **홈택스(hometax.go.kr)** 접속

@@ -18,6 +18,8 @@ tags: [곰플레이어, GOM Player, 동영상 플레이어, 다운로드]
 | 지원 형식 | AVI, MP4, MKV, MOV, WMV 등 대부분 형식 |
 | 특징 | 코덱 내장, 자막 자동 검색, 360° VR 재생 |
 
+{% include cta-button.html url="https://www.gom.com/pc/player/gomplayer.html" text="곰플레이어 공식 다운로드" type="download" affiliate="gom" %}
+
 ## 공식 다운로드 방법
 
 1. 곰앤컴퍼니 공식 사이트에 접속합니다.

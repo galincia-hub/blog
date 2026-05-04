@@ -18,6 +18,8 @@ tags: [이력서, 이력서 양식, 무료 다운로드, 취업]
 | 영문 이력서 | 영어 작성 | 외국계 기업 |
 | 아르바이트 이력서 | 간단한 형식 | 단기 알바 |
 
+{% include cta-button.html url="https://www.work.go.kr/seekWantedMain.do" text="워크넷 이력서 양식 바로가기" type="download" affiliate="worknet" %}
+
 ## 공식 무료 다운로드 경로
 
 ### 1. 고용노동부 워크넷
