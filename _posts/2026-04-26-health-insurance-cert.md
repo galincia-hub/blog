@@ -4,6 +4,7 @@ date: 2026-04-26
 last_updated: 2026-04-26
 category: health
 schema_type: howto_faq
+type: link
 thumbnail: /assets/images/thumbnails/health-insurance-cert.png
 description: "건강보험 자격득실확인서를 국민건강보험공단 홈페이지와 정부24에서 즉시 발급받는 방법을 안내합니다."
 tags: [건강보험, 자격득실확인서, 건강보험공단, 증명서 발급]

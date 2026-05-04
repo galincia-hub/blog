@@ -1,0 +1,5 @@
+---
+layout: null
+permalink: /posts.json
+---
+[{% for post in site.posts %}{"title":{{ post.title | jsonify }},"slug":"{{ post.slug }}","date":"{{ post.date | date: '%Y-%m-%d' }}","last_updated":{{ post.last_updated | default: "" | jsonify }},"category":{{ post.category | default: "" | jsonify }},"type":{{ post.type | default: "" | jsonify }},"schema_type":{{ post.schema_type | default: "" | jsonify }},"tags":{{ post.tags | default: "" | jsonify }},"description":{{ post.description | default: "" | jsonify }},"thumbnail":{{ post.thumbnail | default: "" | jsonify }},"url":"{{ post.url }}","char_count":{{ post.content | strip_html | strip | size }},"has_faq":{% if post.content contains '자주 묻는 질문' %}true{% else %}false{% endif %},"cta_count":{{ post.content | split: 'class="cta-btn' | size | minus: 1 }}}{% unless forloop.last %},{% endunless %}{% endfor %}]

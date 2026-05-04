@@ -4,6 +4,7 @@ date: 2026-05-01
 last_updated: 2026-05-01
 category: life
 schema_type: article_faq
+type: phone
 thumbnail: /assets/images/thumbnails/skt-customer-service.png
 description: "SKT 고객센터 전화번호, 운영 시간, 빠른 상담원 연결 방법을 정리했습니다."
 tags: [SKT, SK텔레콤, 고객센터, 전화번호]
