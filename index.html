@@ -1,0 +1,16 @@
+---
+layout: default
+title: "모아가이드 — 실용 정보 블로그"
+---
+<div class="page-header">
+  <h1>전체 글</h1>
+  <p>IT, 생활, 금융, 건강 등 실용적인 정보를 모았습니다.</p>
+</div>
+
+<div class="card-list">
+  {% for post in paginator.posts %}
+    {% include card.html post=post %}
+  {% endfor %}
+</div>
+
+{% include pagination.html %}

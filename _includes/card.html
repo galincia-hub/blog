@@ -1,0 +1,28 @@
+{% assign post = include.post %}
+{% assign cat = post.category %}
+{% if cat == 'it' %}{% assign badge_class = 'badge-it' %}{% assign cat_label = 'IT 정보' %}
+{% elsif cat == 'life' %}{% assign badge_class = 'badge-life' %}{% assign cat_label = '생활 정보' %}
+{% elsif cat == 'finance' %}{% assign badge_class = 'badge-finance' %}{% assign cat_label = '금융 정보' %}
+{% elsif cat == 'health' %}{% assign badge_class = 'badge-health' %}{% assign cat_label = '건강 정보' %}
+{% elsif cat == 'review' %}{% assign badge_class = 'badge-review' %}{% assign cat_label = '제품 추천' %}
+{% endif %}
+
+<article class="card">
+  <a href="{{ post.url }}" class="card-thumb">
+    {% if post.thumbnail %}
+      <img src="{{ post.thumbnail }}" alt="{{ post.title }}" loading="lazy">
+    {% else %}
+      <img src="/assets/images/thumbnails/default.png" alt="{{ post.title }}" loading="lazy">
+    {% endif %}
+  </a>
+  <div class="card-body">
+    <div class="card-meta">
+      <span class="badge {{ badge_class }}">{{ cat_label }}</span>
+      <span class="card-date">{{ post.date | date: "%Y.%m.%d" }}</span>
+    </div>
+    <a href="{{ post.url }}"><h2 class="card-title">{{ post.title }}</h2></a>
+    {% if post.description %}
+      <p class="card-desc">{{ post.description }}</p>
+    {% endif %}
+  </div>
+</article>

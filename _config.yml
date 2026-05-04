@@ -1,0 +1,41 @@
+title: "모아가이드"
+description: "필요한 정보를 한 곳에서 찾는 실용 정보 블로그"
+url: ""
+baseurl: ""
+
+author:
+  name: "모아가이드"
+
+# Build
+markdown: kramdown
+highlighter: rouge
+permalink: /posts/:slug/
+
+# Pagination
+paginate: 12
+paginate_path: "/page:num/"
+
+# Plugins
+plugins:
+  - jekyll-sitemap
+  - jekyll-seo-tag
+  - jekyll-feed
+  - jekyll-paginate
+
+# Exclude
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - scripts/
+  - README.md
+  - "모아가이드_기획서_v1.md"
+  - node_modules/
+  - vendor/
+
+# Defaults
+defaults:
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"

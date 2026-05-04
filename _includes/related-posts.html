@@ -1,0 +1,12 @@
+{% assign cat = page.category %}
+{% assign related = site.posts | where: "category", cat | where_exp: "p", "p.url != page.url" | limit: 4 %}
+{% if related.size > 0 %}
+<section class="related-posts">
+  <h3>관련 글</h3>
+  <div class="related-grid">
+    {% for post in related %}
+      {% include card.html post=post %}
+    {% endfor %}
+  </div>
+</section>
+{% endif %}
