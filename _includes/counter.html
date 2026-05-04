@@ -1,25 +1,45 @@
 <!-- 페이지뷰 카운터 (Supabase) -->
 <script>
 (function(){
-  // 관리자 페이지, 404 등은 제외
   if(location.pathname==='/admin.html') return;
-  
+
   var SB_URL='https://wblffwhxaqxtqjccmwig.supabase.co';
   var SB_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndibGZmd2h4YXF4dHFqY2Ntd2lnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc4OTQzMDcsImV4cCI6MjA5MzQ3MDMwN30.9uGXG1zw3bF5ojMcfQnPr8zsirn3WejIjK60XOZfAcg';
 
-  fetch(SB_URL+'/rest/v1/page_views',{
-    method:'POST',
-    headers:{
-      'Content-Type':'application/json',
-      'apikey':SB_KEY,
-      'Authorization':'Bearer '+SB_KEY,
-      'Prefer':'return=minimal'
+  function classifyRef(referrer) {
+    if (!referrer) return 'direct';
+    var h = '';
+    try { h = new URL(referrer).hostname.replace(/^www\./, ''); } catch(e) { return 'other'; }
+    if (/google\.(com|co\.kr)$/.test(h))   return 'google';
+    if (h === 'search.naver.com')           return 'naver';
+    if (h === 'search.daum.net')            return 'daum';
+    if (/bing\.com$/.test(h))              return 'bing';
+    if (/t\.co$|twitter\.com$|x\.com$/.test(h)) return 'twitter';
+    if (/facebook\.com$|fb\.com$/.test(h)) return 'facebook';
+    if (/instagram\.com$/.test(h))         return 'instagram';
+    if (/youtube\.com$/.test(h))           return 'youtube';
+    if (/perplexity\.ai$/.test(h))         return 'perplexity';
+    if (/chat\.openai\.com$|chatgpt\.com$/.test(h)) return 'chatgpt';
+    if (h === 'blog.naver.com')            return 'naver_blog';
+    if (/tistory\.com$/.test(h))           return 'tistory';
+    return 'other';
+  }
+
+  var ref = document.referrer || '';
+  fetch(SB_URL+'/rest/v1/page_views', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'apikey': SB_KEY,
+      'Authorization': 'Bearer '+SB_KEY,
+      'Prefer': 'return=minimal'
     },
-    body:JSON.stringify({
-      page_path: location.pathname,
-      page_title: document.title||'',
-      referrer: document.referrer||'',
-      user_agent: navigator.userAgent||''
+    body: JSON.stringify({
+      page_path:  location.pathname,
+      page_title: document.title || '',
+      referrer:   ref,
+      ref_type:   classifyRef(ref),
+      user_agent: navigator.userAgent || ''
     })
   }).catch(function(){});
 })();

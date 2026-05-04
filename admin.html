@@ -698,23 +698,37 @@ async function loadTraffic() {
       </div>`
     ).join('') || '<div style="color:#bbb;font-size:.82rem;padding:8px">데이터 없음</div>';
 
-    // ── 유입 경로 ──
+    // ── 유입 경로 (ref_type 기준) ──
+    const REF_LABEL = {
+      google:'구글 검색', naver:'네이버 검색', daum:'다음 검색', bing:'빙 검색',
+      twitter:'트위터/X', facebook:'페이스북', instagram:'인스타그램', youtube:'유튜브',
+      perplexity:'Perplexity AI', chatgpt:'ChatGPT', naver_blog:'네이버 블로그',
+      tistory:'티스토리', direct:'직접 접속', other:'기타'
+    };
+    const REF_COLOR = {
+      google:'#4285f4', naver:'#03c75a', daum:'#ff5f00', bing:'#008272',
+      twitter:'#1da1f2', facebook:'#1877f2', instagram:'#e1306c', youtube:'#ff0000',
+      perplexity:'#6366f1', chatgpt:'#10a37f', naver_blog:'#03c75a',
+      tistory:'#f0801a', direct:'#888', other:'#aaa'
+    };
     const refCounts = {};
     rows.forEach(r=>{
-      let ref = r.referrer||'(직접 방문)';
-      try { if(ref!=='(직접 방문)') ref = new URL(ref).hostname; } catch{}
-      if(!refCounts[ref]) refCounts[ref]=0;
-      refCounts[ref]++;
+      const rt = r.ref_type || 'direct';
+      refCounts[rt] = (refCounts[rt]||0) + 1;
     });
-    const topRefs = Object.entries(refCounts)
-      .sort((a,b)=>b[1]-a[1])
-      .slice(0,8);
-    document.getElementById('tf-ref').innerHTML = topRefs.map(([ref,cnt])=>
-      `<div class="tf-row">
-        <span class="tf-row-ref">${e(ref)}</span>
+    const totalRef = rows.length;
+    const topRefs = Object.entries(refCounts).sort((a,b)=>b[1]-a[1]);
+    document.getElementById('tf-ref').innerHTML = topRefs.map(([rt,cnt])=>{
+      const lbl = REF_LABEL[rt]||rt;
+      const col = REF_COLOR[rt]||'#aaa';
+      const pct = totalRef ? Math.round(cnt/totalRef*100) : 0;
+      return `<div class="tf-row" style="align-items:center">
+        <span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:${col};flex-shrink:0;margin-right:8px"></span>
+        <span class="tf-row-ref" style="flex:1">${e(lbl)}</span>
+        <span style="font-size:.72rem;color:#aaa;margin-right:10px;flex-shrink:0">${pct}%</span>
         <span class="tf-row-cnt">${n(cnt)}</span>
-      </div>`
-    ).join('') || '<div style="color:#bbb;font-size:.82rem;padding:8px">데이터 없음</div>';
+      </div>`;
+    }).join('') || '<div style="color:#bbb;font-size:.82rem;padding:8px">데이터 없음</div>';
 
     // ── 최근 방문 20건 ──
     document.getElementById('tf-recent').innerHTML = rows.slice(0,20).map(r=>{
