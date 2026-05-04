@@ -29,6 +29,7 @@ exclude:
   - scripts/
   - README.md
   - "모아가이드_기획서_v1.md"
+  - "모아가이드_관리자페이지_기획서_v1.md"
   - node_modules/
   - vendor/
 

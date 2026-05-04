@@ -1,3 +1,7 @@
+---
+layout: null
+permalink: /admin.html
+---
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -8,205 +12,207 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'Noto Sans KR',sans-serif;background:#f8f5f0;color:#1a1a1a;font-size:14px}
-a{text-decoration:none}
+body{font-family:'Noto Sans KR',sans-serif;background:#f8f7f4;color:#1a1a1a;font-size:14px;line-height:1.6}
 
 /* ── Login ── */
-#login-screen{display:flex;align-items:center;justify-content:center;min-height:100vh}
-.login-card{background:#fff;border-radius:20px;padding:48px 40px;width:340px;text-align:center;box-shadow:0 8px 32px rgba(0,0,0,.10)}
-.login-logo{font-size:2rem;margin-bottom:12px}
-.login-title{font-size:1.3rem;font-weight:700;margin-bottom:6px}
-.login-sub{color:#aaa;font-size:.85rem;margin-bottom:28px}
-.login-input{width:100%;padding:14px;border:2px solid #e8e4df;border-radius:12px;font-size:1.6rem;text-align:center;letter-spacing:12px;outline:none;transition:border-color .2s;font-family:inherit}
+#login-screen{display:flex;align-items:center;justify-content:center;min-height:100vh;background:#f8f7f4}
+.login-card{background:#fff;border-radius:20px;padding:48px 40px;width:340px;text-align:center;box-shadow:0 4px 24px rgba(0,0,0,.08)}
+.login-logo{font-size:2.2rem;margin-bottom:10px}
+.login-title{font-size:1.25rem;font-weight:700;margin-bottom:5px;color:#1a1a1a}
+.login-sub{color:#aaa;font-size:.82rem;margin-bottom:28px}
+.login-input{width:100%;padding:13px;border:2px solid #e8e8e8;border-radius:12px;font-size:1.8rem;text-align:center;letter-spacing:14px;outline:none;transition:border-color .2s;font-family:inherit;color:#1a1a1a}
 .login-input:focus{border-color:#2563a8}
-.login-btn{width:100%;padding:14px;background:#2563a8;color:#fff;border:none;border-radius:12px;font-size:1rem;font-weight:700;cursor:pointer;margin-top:14px;transition:background .15s}
+.login-btn{width:100%;padding:13px;background:#2563a8;color:#fff;border:none;border-radius:12px;font-size:.95rem;font-weight:700;cursor:pointer;margin-top:12px;transition:background .15s;font-family:inherit}
 .login-btn:hover{background:#1d4f8a}
-.login-err{color:#e53e3e;font-size:.82rem;margin-top:10px;min-height:18px}
+.login-err{color:#e53935;font-size:.8rem;margin-top:8px;min-height:18px}
 
-/* ── Layout ── */
+/* ── Admin Layout ── */
 #admin-panel{display:none}
-.admin-header{background:#fff;border-bottom:1px solid #e8e4df;padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:54px;position:sticky;top:0;z-index:50;box-shadow:0 1px 4px rgba(0,0,0,.05)}
-.admin-logo{font-weight:700;font-size:1.05rem;color:#2563a8}
-.admin-logout{background:none;border:1.5px solid #ddd;border-radius:8px;padding:5px 12px;cursor:pointer;font-size:.78rem;color:#888;font-family:inherit}
-.admin-logout:hover{border-color:#aaa;color:#444}
+.adm-header{background:#fff;border-bottom:1px solid #ebebeb;padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:52px;position:sticky;top:0;z-index:100;box-shadow:0 1px 3px rgba(0,0,0,.04)}
+.adm-logo{font-weight:700;font-size:1rem;color:#2563a8;display:flex;align-items:center;gap:7px}
+.adm-logout{background:none;border:1.5px solid #e0e0e0;border-radius:8px;padding:4px 12px;cursor:pointer;font-size:.75rem;color:#999;font-family:inherit;transition:all .15s}
+.adm-logout:hover{border-color:#bbb;color:#555}
 
 /* ── Tabs ── */
-.tab-nav{background:#fff;border-bottom:1px solid #e8e4df;display:flex;padding:0 20px;gap:0;overflow-x:auto}
-.tab-btn{padding:14px 18px;border:none;background:none;cursor:pointer;font-size:.85rem;color:#999;border-bottom:3px solid transparent;white-space:nowrap;transition:all .15s;font-family:inherit}
+.tab-nav{background:#fff;border-bottom:1px solid #ebebeb;display:flex;padding:0 20px;overflow-x:auto;scrollbar-width:none}
+.tab-nav::-webkit-scrollbar{display:none}
+.tab-btn{padding:13px 18px;border:none;background:none;cursor:pointer;font-size:.82rem;color:#aaa;border-bottom:3px solid transparent;white-space:nowrap;transition:all .15s;font-family:inherit}
 .tab-btn:hover{color:#555}
 .tab-btn.active{color:#2563a8;border-bottom-color:#2563a8;font-weight:700}
-.tab-content{display:none;padding:20px 24px;max-width:900px;margin:0 auto}
-.tab-content.active{display:block}
+.tab-pane{display:none;padding:20px 24px;max-width:920px;margin:0 auto}
+.tab-pane.active{display:block}
 
 /* ── Stats bar ── */
-.stats-bar{display:flex;gap:6px;background:#fff;border-radius:12px;padding:14px 18px;margin-bottom:14px;box-shadow:0 1px 4px rgba(0,0,0,.05);flex-wrap:wrap;align-items:center}
-.stat-item{font-size:.82rem;cursor:pointer;padding:4px 10px;border-radius:20px;border:1.5px solid transparent;transition:all .15s;white-space:nowrap}
-.stat-item:hover{background:#f5f5f5}
-.stat-item b{font-weight:700}
+.stats-bar{display:flex;gap:6px;background:#fff;border-radius:12px;padding:12px 18px;margin-bottom:14px;box-shadow:0 1px 3px rgba(0,0,0,.04);flex-wrap:wrap;align-items:center}
+.stat-pill{font-size:.8rem;cursor:pointer;padding:4px 11px;border-radius:20px;border:1.5px solid transparent;transition:all .15s;white-space:nowrap;font-weight:500}
+.stat-pill:hover{opacity:.8}
+.stat-pill-all{color:#2563a8;border-color:#c7d9f5;background:#eef4ff}
 
 /* ── Search ── */
 .search-wrap{position:relative;margin-bottom:10px}
-.search-input{width:100%;padding:11px 16px 11px 40px;border:2px solid #e8e4df;border-radius:10px;font-size:.9rem;outline:none;background:#fff;font-family:inherit;transition:border-color .2s}
+.search-input{width:100%;padding:10px 14px 10px 38px;border:1.5px solid #e8e8e8;border-radius:10px;font-size:.88rem;outline:none;background:#fff;font-family:inherit;transition:border-color .2s}
 .search-input:focus{border-color:#2563a8}
-.search-icon{position:absolute;left:13px;top:50%;transform:translateY(-50%);color:#bbb;font-size:.95rem;pointer-events:none}
+.search-icon{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:#bbb;font-size:.9rem;pointer-events:none}
 
 /* ── Tag filter bar ── */
-.tag-filter-bar{display:flex;align-items:center;gap:8px;margin-bottom:10px;padding:8px 14px;background:#ebf3ff;border-radius:8px;font-size:.82rem}
-.tag-filter-bar b{color:#2563a8}
-.remove-tag{cursor:pointer;color:#2563a8;font-weight:700;padding:0 4px}
+.tag-bar{display:flex;align-items:center;gap:8px;margin-bottom:10px;padding:7px 13px;background:#eef4ff;border-radius:8px;font-size:.8rem}
+.tag-bar b{color:#2563a8}
+.tag-bar-remove{cursor:pointer;color:#2563a8;font-weight:700;padding:0 3px;margin-left:2px}
 
 /* ── Filter chips ── */
-.filter-row{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px;align-items:center}
-.filter-label{font-size:.75rem;color:#aaa;flex-shrink:0}
-.chip{padding:4px 12px;border-radius:20px;border:1.5px solid #ddd;background:#fff;font-size:.78rem;cursor:pointer;transition:all .15s;white-space:nowrap}
+.filter-row{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:7px;align-items:center}
+.filter-lbl{font-size:.72rem;color:#bbb;margin-right:2px;flex-shrink:0}
+.chip{padding:4px 11px;border-radius:20px;border:1.5px solid #e0e0e0;background:#fff;font-size:.76rem;cursor:pointer;transition:all .15s;white-space:nowrap;font-family:inherit}
 .chip:hover{border-color:#aaa}
 .chip.active{background:#2563a8;color:#fff;border-color:#2563a8}
 
 /* ── Sort row ── */
-.sort-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
-.result-count{font-size:.8rem;color:#aaa}
-.sort-btn{background:#fff;border:1.5px solid #ddd;border-radius:8px;padding:5px 12px;cursor:pointer;font-size:.78rem;font-family:inherit}
+.sort-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:11px}
+.result-cnt{font-size:.76rem;color:#bbb}
+.sort-btn{background:#fff;border:1.5px solid #e0e0e0;border-radius:8px;padding:5px 12px;cursor:pointer;font-size:.76rem;font-family:inherit;transition:border-color .15s}
 .sort-btn:hover{border-color:#aaa}
 
-/* ── Post cards ── */
-.post-card{background:#fff;border-radius:12px;padding:15px 18px;margin-bottom:8px;box-shadow:0 1px 4px rgba(0,0,0,.05);border-left:4px solid #ddd;transition:box-shadow .15s}
-.post-card:hover{box-shadow:0 3px 10px rgba(0,0,0,.09)}
-.card-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px;gap:8px}
-.card-num{color:#ccc;font-size:.75rem;flex-shrink:0;padding-top:2px}
-.card-title-wrap{flex:1}
-.card-title{font-weight:700;font-size:.92rem;line-height:1.4}
-.card-date{font-size:.72rem;color:#bbb;text-align:right;white-space:nowrap;flex-shrink:0;line-height:1.6}
-.card-badges{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:7px}
-.badge{display:inline-block;padding:2px 8px;border-radius:20px;font-size:.7rem;font-weight:600;white-space:nowrap}
-.badge-cat{color:#fff}
-.badge-type{background:#f0f0f0;color:#666}
-.badge-schema{background:#eef3ff;color:#2563a8}
-.card-tags{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:7px}
-.tag{font-size:.75rem;color:#2563a8;cursor:pointer;transition:opacity .15s}
-.tag:hover{opacity:.7;text-decoration:underline}
-.card-desc{font-size:.82rem;color:#666;margin-bottom:9px;line-height:1.55}
-.card-bottom{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px}
-.card-quality{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
-.q-item{font-size:.75rem;color:#888}
-.q-item.warn{color:#e53e3e}
-.q-item.caution{color:#d97706}
-.q-item.ok{color:#059669}
+/* ── Post card ── */
+.post-card{background:#fff;border-radius:12px;padding:14px 18px;margin-bottom:8px;box-shadow:0 1px 3px rgba(0,0,0,.04);border-left:3px solid #ddd;transition:box-shadow .15s}
+.post-card:hover{box-shadow:0 3px 10px rgba(0,0,0,.08)}
+.card-row1{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin-bottom:7px}
+.card-num{color:#ccc;font-size:.72rem;flex-shrink:0;padding-top:3px}
+.card-title{font-weight:700;font-size:.9rem;flex:1;line-height:1.4}
+.card-date{font-size:.7rem;color:#bbb;text-align:right;white-space:nowrap;flex-shrink:0;line-height:1.7}
+.card-badges{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:6px}
+.badge{display:inline-block;padding:2px 8px;border-radius:20px;font-size:.68rem;font-weight:600;white-space:nowrap}
+/* category pastel badges */
+.bc-it     {background:#e8f5e9;color:#2d6b4f}
+.bc-life   {background:#e6f1fb;color:#1a237e}
+.bc-finance{background:#fff8e1;color:#e65100}
+.bc-health {background:#fce4ec;color:#880e4f}
+.bc-review {background:#eeedfe;color:#4a148c}
+/* type & schema badges */
+.bt{background:#f3f3f3;color:#666}
+.bs{background:#eef3ff;color:#2563a8}
+.card-tags{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:6px}
+.tag{font-size:.73rem;color:#2563a8;cursor:pointer;transition:opacity .15s}
+.tag:hover{opacity:.65;text-decoration:underline}
+.card-desc{font-size:.8rem;color:#666;margin-bottom:8px;line-height:1.55}
+.card-bottom{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:7px}
+.card-quality{display:flex;align-items:center;gap:9px;flex-wrap:wrap}
+.qi{font-size:.73rem;color:#aaa}
+.qi.ok{color:#388e3c}.qi.warn{color:#e53935}.qi.caution{color:#f57c00}
 .card-actions{display:flex;gap:6px;flex-shrink:0}
-.btn-sm{padding:4px 11px;border-radius:6px;font-size:.74rem;cursor:pointer;border:1.5px solid #ddd;background:#fff;font-family:inherit;transition:all .15s;white-space:nowrap}
-.btn-sm:hover{background:#f5f5f5;border-color:#bbb}
-mark{background:#fff176;border-radius:2px;padding:0 1px}
+.btn-sm{padding:4px 11px;border-radius:7px;font-size:.72rem;cursor:pointer;border:1.5px solid #e0e0e0;background:#fff;font-family:inherit;transition:all .15s;white-space:nowrap}
+.btn-sm:hover{background:#f7f7f7;border-color:#bbb}
+mark{background:#fff59d;border-radius:2px;padding:0 1px}
 
 /* ── Toast ── */
-#toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(60px);background:#1a1a1a;color:#fff;padding:9px 22px;border-radius:24px;font-size:.85rem;opacity:0;transition:all .25s;z-index:9999;pointer-events:none;white-space:nowrap}
+#toast{position:fixed;bottom:26px;left:50%;transform:translateX(-50%) translateY(56px);background:#1a1a1a;color:#fff;padding:8px 20px;border-radius:24px;font-size:.82rem;opacity:0;transition:all .25s;z-index:9999;pointer-events:none;white-space:nowrap}
 #toast.show{transform:translateX(-50%) translateY(0);opacity:1}
 
-/* ── Placeholder tabs ── */
-.placeholder{display:flex;align-items:center;justify-content:center;min-height:320px;text-align:center}
-.placeholder-inner .ph-icon{font-size:2.4rem;margin-bottom:14px}
-.placeholder-inner .ph-title{font-size:1rem;font-weight:700;color:#555;margin-bottom:12px}
-.placeholder-inner .ph-list{color:#bbb;font-size:.82rem;line-height:2.1}
+/* ── Placeholder ── */
+.placeholder{display:flex;align-items:center;justify-content:center;min-height:300px;text-align:center}
+.ph-icon{font-size:2.2rem;margin-bottom:12px}
+.ph-title{font-size:.95rem;font-weight:700;color:#666;margin-bottom:10px}
+.ph-list{color:#bbb;font-size:.8rem;line-height:2}
 
 /* ── Health badges ── */
-.health-grid{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:22px}
-.health-badge{background:#fff;border-radius:10px;padding:12px 16px;box-shadow:0 1px 4px rgba(0,0,0,.06);border-left:4px solid #ddd;min-width:110px}
-.hb-label{font-size:.72rem;color:#aaa;margin-bottom:4px}
-.hb-val{font-size:1.1rem;font-weight:700}
+.health-grid{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:22px}
+.health-badge{background:#fff;border-radius:10px;padding:12px 16px;box-shadow:0 1px 3px rgba(0,0,0,.05);border-left:3px solid #ddd;min-width:108px}
+.hb-lbl{font-size:.7rem;color:#bbb;margin-bottom:3px}
+.hb-val{font-size:1.05rem;font-weight:700}
 
-/* ── Keyword cards ── */
-.kw-section-title{font-size:.88rem;font-weight:700;color:#666;margin-bottom:12px}
+/* ── Keyword grid ── */
+.kw-sec-title{font-size:.85rem;font-weight:700;color:#666;margin-bottom:12px}
 .kw-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
-.kw-card{background:#fff;border-radius:12px;padding:14px 16px;box-shadow:0 1px 4px rgba(0,0,0,.06);transition:opacity .2s}
+.kw-card{background:#fff;border-radius:12px;padding:14px 16px;box-shadow:0 1px 3px rgba(0,0,0,.05);transition:opacity .2s}
 .kw-card.done{opacity:.38}
-.kw-num{font-size:.7rem;color:#ccc;margin-bottom:3px}
-.kw-title{font-weight:700;font-size:.9rem;margin-bottom:8px;line-height:1.4}
-.kw-badges{display:flex;gap:5px;margin-bottom:8px;flex-wrap:wrap}
-.kw-dup{font-size:.72rem;color:#d97706;margin-bottom:6px}
-.kw-cmd{background:#f5f7fa;border-radius:6px;padding:7px 10px;font-size:.75rem;color:#555;font-family:'Courier New',monospace;margin-bottom:8px;line-height:1.5;word-break:break-all}
+.kw-num{font-size:.68rem;color:#ccc;margin-bottom:3px}
+.kw-title{font-weight:700;font-size:.88rem;margin-bottom:7px;line-height:1.4}
+.kw-badges{display:flex;gap:5px;margin-bottom:7px;flex-wrap:wrap}
+.kw-dup{font-size:.7rem;color:#f57c00;margin-bottom:5px}
+.kw-cmd{background:#f7f8fa;border-radius:7px;padding:7px 10px;font-size:.73rem;color:#555;font-family:'Courier New',monospace;margin-bottom:8px;line-height:1.5;word-break:break-all}
 .kw-actions{display:flex;gap:6px}
 
-@media(max-width:600px){
-  .tab-btn{padding:12px 12px;font-size:.78rem}
+@media(max-width:768px){
+  .tab-btn{padding:11px 12px;font-size:.76rem}
   .kw-grid{grid-template-columns:1fr}
-  .tab-content{padding:14px 16px}
-  .stats-bar{gap:4px}
+  .tab-pane{padding:14px 15px}
   .card-bottom{flex-direction:column;align-items:flex-start}
 }
 </style>
 </head>
 <body>
 
-<!-- ── Login ── -->
+<!-- ── Login Screen ── -->
 <div id="login-screen">
   <div class="login-card">
     <div class="login-logo">📊</div>
     <div class="login-title">모아가이드 관리자</div>
     <div class="login-sub">비밀번호를 입력하세요</div>
-    <input type="password" id="pw-input" class="login-input" placeholder="••••" maxlength="8"
-           onkeydown="if(event.key==='Enter')doLogin()" autofocus>
+    <input type="password" id="pw" class="login-input" placeholder="••••"
+           maxlength="6" onkeydown="if(event.key==='Enter')doLogin()" autofocus>
     <button class="login-btn" onclick="doLogin()">로그인</button>
-    <div id="login-err" class="login-err"></div>
+    <div id="pw-err" class="login-err"></div>
   </div>
 </div>
 
 <!-- ── Admin Panel ── -->
 <div id="admin-panel">
-  <header class="admin-header">
-    <div class="admin-logo">📊 모아가이드 관리자</div>
-    <button class="admin-logout" onclick="doLogout()">로그아웃</button>
+  <header class="adm-header">
+    <div class="adm-logo">📊 모아가이드 관리자</div>
+    <button class="adm-logout" onclick="doLogout()">로그아웃</button>
   </header>
 
   <nav class="tab-nav">
-    <button class="tab-btn active" id="tbtn-posts"    onclick="switchTab('posts')">📝 글 관리</button>
-    <button class="tab-btn"        id="tbtn-traffic"  onclick="switchTab('traffic')">📊 트래픽 분석</button>
-    <button class="tab-btn"        id="tbtn-write"    onclick="switchTab('write')">✍️ 글 작성</button>
-    <button class="tab-btn"        id="tbtn-system"   onclick="switchTab('system')">⚙️ 시스템</button>
+    <button class="tab-btn active" id="tb-posts"   onclick="showTab('posts')">📝 글 관리</button>
+    <button class="tab-btn"        id="tb-traffic" onclick="showTab('traffic')">📊 트래픽 분석</button>
+    <button class="tab-btn"        id="tb-write"   onclick="showTab('write')">✍️ 글 작성</button>
+    <button class="tab-btn"        id="tb-system"  onclick="showTab('system')">⚙️ 시스템</button>
   </nav>
 
   <!-- ── 탭1: 글 관리 ── -->
-  <div id="tab-posts" class="tab-content active">
-    <div id="stats-bar" class="stats-bar">로딩 중...</div>
+  <div id="tp-posts" class="tab-pane active">
+    <div id="stats-bar" class="stats-bar">불러오는 중...</div>
 
     <div class="search-wrap">
       <span class="search-icon">🔍</span>
-      <input type="text" id="search-input" class="search-input"
+      <input type="text" id="q" class="search-input"
              placeholder="제목, 태그, 설명 동시 검색..."
-             oninput="onSearch(this.value)">
+             oninput="onQ(this.value)">
     </div>
 
-    <div id="tag-filter-bar" class="tag-filter-bar" style="display:none">
-      현재 필터: <b id="tag-filter-label"></b>
-      <span class="remove-tag" onclick="clearTag()">✕ 해제</span>
+    <div id="tag-bar" class="tag-bar" style="display:none">
+      필터: <b id="tag-lbl"></b>
+      <span class="tag-bar-remove" onclick="clearTag()">✕ 해제</span>
     </div>
 
     <div class="filter-row">
-      <span class="filter-label">카테고리</span>
-      <span class="chip active" data-cat="all"     onclick="toggleCat('all')">전체</span>
-      <span class="chip"        data-cat="it"      onclick="toggleCat('it')">IT 정보</span>
-      <span class="chip"        data-cat="life"    onclick="toggleCat('life')">생활 정보</span>
-      <span class="chip"        data-cat="finance" onclick="toggleCat('finance')">금융 정보</span>
-      <span class="chip"        data-cat="health"  onclick="toggleCat('health')">건강 정보</span>
-      <span class="chip"        data-cat="review"  onclick="toggleCat('review')">제품 추천</span>
+      <span class="filter-lbl">카테고리</span>
+      <span class="chip active" data-cat="all"     onclick="togCat('all')">전체</span>
+      <span class="chip"        data-cat="it"      onclick="togCat('it')">IT 정보</span>
+      <span class="chip"        data-cat="life"    onclick="togCat('life')">생활 정보</span>
+      <span class="chip"        data-cat="finance" onclick="togCat('finance')">금융 정보</span>
+      <span class="chip"        data-cat="health"  onclick="togCat('health')">건강 정보</span>
+      <span class="chip"        data-cat="review"  onclick="togCat('review')">제품 추천</span>
     </div>
     <div class="filter-row" style="margin-bottom:14px">
-      <span class="filter-label">글 유형</span>
-      <span class="chip active" data-type="all"      onclick="toggleType('all')">전체</span>
-      <span class="chip"        data-type="download" onclick="toggleType('download')">다운로드</span>
-      <span class="chip"        data-type="link"     onclick="toggleType('link')">바로가기</span>
-      <span class="chip"        data-type="phone"    onclick="toggleType('phone')">고객센터</span>
-      <span class="chip"        data-type="form"     onclick="toggleType('form')">양식</span>
+      <span class="filter-lbl">글 유형</span>
+      <span class="chip active" data-type="all"      onclick="togType('all')">전체</span>
+      <span class="chip"        data-type="download" onclick="togType('download')">다운로드</span>
+      <span class="chip"        data-type="link"     onclick="togType('link')">바로가기</span>
+      <span class="chip"        data-type="phone"    onclick="togType('phone')">고객센터</span>
+      <span class="chip"        data-type="form"     onclick="togType('form')">양식</span>
     </div>
 
     <div class="sort-row">
-      <span id="result-count" class="result-count">—</span>
-      <button class="sort-btn" onclick="toggleSort()" id="sort-btn">최신순 ↕</button>
+      <span id="rcnt" class="result-cnt">—</span>
+      <button class="sort-btn" id="sort-btn" onclick="togSort()">최신순 ↕</button>
     </div>
     <div id="post-list"></div>
   </div>
 
   <!-- ── 탭2: 트래픽 분석 ── -->
-  <div id="tab-traffic" class="tab-content">
+  <div id="tp-traffic" class="tab-pane">
     <div class="placeholder">
-      <div class="placeholder-inner">
+      <div>
         <div class="ph-icon">📊</div>
         <div class="ph-title">Supabase 카운터 연동 후 활성화 예정</div>
         <div class="ph-list">
@@ -218,16 +224,16 @@ mark{background:#fff176;border-radius:2px;padding:0 1px}
   </div>
 
   <!-- ── 탭3: 글 작성 ── -->
-  <div id="tab-write" class="tab-content">
-    <div id="health-section"></div>
-    <div class="kw-section-title">📌 추천 키워드 (10개)</div>
+  <div id="tp-write" class="tab-pane">
+    <div id="health-wrap"></div>
+    <div class="kw-sec-title">📌 추천 키워드 (10개)</div>
     <div id="kw-grid" class="kw-grid"></div>
   </div>
 
   <!-- ── 탭4: 시스템 ── -->
-  <div id="tab-system" class="tab-content">
+  <div id="tp-system" class="tab-pane">
     <div class="placeholder">
-      <div class="placeholder-inner">
+      <div>
         <div class="ph-icon">⚙️</div>
         <div class="ph-title">작업 예정</div>
         <div class="ph-list">
@@ -242,395 +248,307 @@ mark{background:#fff176;border-radius:2px;padding:0 1px}
   </div>
 </div>
 
-<!-- ── Toast ── -->
 <div id="toast"></div>
 
 <script>
-// ────────────────────────────────
-//  Config
-// ────────────────────────────────
+{% raw %}
+// ══════════════════════════════
+//  CONFIG
+// ══════════════════════════════
 const PASS = '0408';
 
 const CAT = {
-  it:      { label: 'IT 정보',   color: '#4CAF50' },
-  life:    { label: '생활 정보', color: '#2196F3' },
-  finance: { label: '금융 정보', color: '#FF9800' },
-  health:  { label: '건강 정보', color: '#E91E63' },
-  review:  { label: '제품 추천', color: '#9C27B0' }
+  it:      { label:'IT 정보',   cls:'bc-it',      border:'#2d6b4f', statBg:'#e8f5e9', statColor:'#2d6b4f' },
+  life:    { label:'생활 정보', cls:'bc-life',     border:'#1a237e', statBg:'#e6f1fb', statColor:'#1a237e' },
+  finance: { label:'금융 정보', cls:'bc-finance',  border:'#e65100', statBg:'#fff8e1', statColor:'#e65100' },
+  health:  { label:'건강 정보', cls:'bc-health',   border:'#880e4f', statBg:'#fce4ec', statColor:'#880e4f' },
+  review:  { label:'제품 추천', cls:'bc-review',   border:'#4a148c', statBg:'#eeedfe', statColor:'#4a148c' }
 };
-const TYPE_LABEL = {
-  download: '다운로드', link: '바로가기', phone: '고객센터',
-  form: '양식', guide: '가이드', review: '비교리뷰'
+const TYPE_LBL = {
+  download:'다운로드', link:'바로가기', phone:'고객센터',
+  form:'양식', guide:'가이드', review:'비교리뷰'
 };
-const SCHEMA_LABEL = {
-  article_faq: '기사+FAQ', software_faq: '소프트웨어+FAQ',
-  howto_faq: '방법+FAQ', article: '기사'
+const SCHEMA_LBL = {
+  article_faq:'기사+FAQ', software_faq:'소프트웨어+FAQ',
+  howto_faq:'방법+FAQ', article:'기사'
 };
-
 const KEYWORDS = [
-  { title: '윈도우11 화면 캡처 방법',      cat: 'it',      type: 'download' },
-  { title: '카카오톡 PC버전 다운로드',      cat: 'it',      type: 'download' },
-  { title: '네이버 바로가기 만들기',        cat: 'it',      type: 'link'     },
-  { title: '삼성전자 서비스센터 전화번호',  cat: 'life',    type: 'phone'    },
-  { title: '재직증명서 양식 다운로드',      cat: 'life',    type: 'form'     },
-  { title: '국민연금 수령나이 조회',        cat: 'finance', type: 'link'     },
-  { title: '자동차세 납부 방법',            cat: 'finance', type: 'link'     },
-  { title: '건강보험료 계산 방법',          cat: 'health',  type: 'link'     },
-  { title: '무료 화면녹화 프로그램 추천',   cat: 'review',  type: 'review'   },
-  { title: '무료 사진편집 프로그램 비교',   cat: 'review',  type: 'review'   }
+  { title:'윈도우11 화면 캡처 방법',     cat:'it',      type:'link'     },
+  { title:'카카오톡 PC버전 다운로드',     cat:'it',      type:'download' },
+  { title:'네이버 바로가기 만들기',       cat:'it',      type:'link'     },
+  { title:'삼성전자 서비스센터 전화번호', cat:'life',    type:'phone'    },
+  { title:'재직증명서 양식 다운로드',     cat:'life',    type:'form'     },
+  { title:'국민연금 수령나이 조회',       cat:'finance', type:'link'     },
+  { title:'자동차세 납부 방법',           cat:'finance', type:'link'     },
+  { title:'건강보험료 계산 방법',         cat:'health',  type:'link'     },
+  { title:'무료 화면녹화 프로그램 추천',  cat:'review',  type:'download' },
+  { title:'무료 사진편집 프로그램 비교',  cat:'review',  type:'download' }
 ];
 
-// ────────────────────────────────
-//  State
-// ────────────────────────────────
-let posts = [];
-let _filtered = [];
-let catFilters  = new Set(['all']);
-let typeFilters = new Set(['all']);
-let activeTag   = null;
-let sortOrder   = 'newest';
-let searchQ     = '';
+// ══════════════════════════════
+//  STATE
+// ══════════════════════════════
+let posts = [], _cur = [];
+let catF  = new Set(['all']);
+let typeF = new Set(['all']);
+let actTag = null, sortDir = 'newest', searchQ = '';
 
-// ────────────────────────────────
-//  Auth
-// ────────────────────────────────
+// ══════════════════════════════
+//  AUTH
+// ══════════════════════════════
 function doLogin() {
-  const v = document.getElementById('pw-input').value;
+  const v = document.getElementById('pw').value;
   if (v === PASS) {
-    sessionStorage.setItem('mg_auth', '1');
+    sessionStorage.setItem('mg_auth','1');
+    localStorage.setItem('moaguide_admin','true');
     document.getElementById('login-screen').style.display = 'none';
-    document.getElementById('admin-panel').style.display = 'block';
+    document.getElementById('admin-panel').style.display  = 'block';
     loadPosts();
   } else {
-    document.getElementById('login-err').textContent = '비밀번호가 틀렸습니다.';
-    document.getElementById('pw-input').value = '';
+    document.getElementById('pw-err').textContent = '비밀번호가 틀렸습니다.';
+    document.getElementById('pw').value = '';
   }
 }
 function doLogout() {
   sessionStorage.removeItem('mg_auth');
+  localStorage.removeItem('moaguide_admin');
   location.reload();
 }
-
 window.addEventListener('load', () => {
   if (sessionStorage.getItem('mg_auth') === '1') {
     document.getElementById('login-screen').style.display = 'none';
-    document.getElementById('admin-panel').style.display = 'block';
+    document.getElementById('admin-panel').style.display  = 'block';
     loadPosts();
   }
 });
 
-// ────────────────────────────────
-//  Data loading
-// ────────────────────────────────
+// ══════════════════════════════
+//  DATA
+// ══════════════════════════════
 async function loadPosts() {
   try {
     const r = await fetch('/posts.json');
-    if (!r.ok) throw new Error();
+    if (!r.ok) throw 0;
     posts = await r.json();
-    renderAll();
-    renderHealth();
-    renderKeywords();
-  } catch(e) {
+    renderStats(); renderPosts(); renderHealth(); renderKw();
+  } catch {
     document.getElementById('post-list').innerHTML =
-      '<div style="color:#e53e3e;padding:24px">⚠️ posts.json 로드 실패. Jekyll 빌드 후 확인하세요.</div>';
+      '<p style="color:#e53935;padding:24px;text-align:center">⚠️ posts.json 로드 실패. Jekyll 빌드 후 확인하세요.</p>';
   }
 }
 
-// ────────────────────────────────
-//  Tab switching
-// ────────────────────────────────
-function switchTab(name) {
+// ══════════════════════════════
+//  TABS
+// ══════════════════════════════
+function showTab(name) {
   ['posts','traffic','write','system'].forEach(t => {
-    document.getElementById('tbtn-'+ t).classList.toggle('active', t === name);
-    document.getElementById('tab-' + t).classList.toggle('active', t === name);
+    document.getElementById('tb-'+t).classList.toggle('active', t===name);
+    document.getElementById('tp-'+t).classList.toggle('active', t===name);
   });
 }
 
-// ────────────────────────────────
-//  Filters
-// ────────────────────────────────
-function toggleCat(cat) {
-  if (cat === 'all') { catFilters = new Set(['all']); }
-  else {
-    catFilters.delete('all');
-    catFilters.has(cat) ? catFilters.delete(cat) : catFilters.add(cat);
-    if (!catFilters.size) catFilters.add('all');
-  }
-  syncChips(); renderPosts();
+// ══════════════════════════════
+//  FILTERS
+// ══════════════════════════════
+function togCat(c) {
+  if (c==='all'){catF=new Set(['all'])}
+  else{catF.delete('all');catF.has(c)?catF.delete(c):catF.add(c);if(!catF.size)catF.add('all')}
+  syncChips();renderPosts();
 }
-function toggleType(type) {
-  if (type === 'all') { typeFilters = new Set(['all']); }
-  else {
-    typeFilters.delete('all');
-    typeFilters.has(type) ? typeFilters.delete(type) : typeFilters.add(type);
-    if (!typeFilters.size) typeFilters.add('all');
-  }
-  syncChips(); renderPosts();
+function togType(t) {
+  if (t==='all'){typeF=new Set(['all'])}
+  else{typeF.delete('all');typeF.has(t)?typeF.delete(t):typeF.add(t);if(!typeF.size)typeF.add('all')}
+  syncChips();renderPosts();
 }
 function syncChips() {
-  document.querySelectorAll('.chip[data-cat]').forEach(c =>
-    c.classList.toggle('active', catFilters.has(c.dataset.cat)));
-  document.querySelectorAll('.chip[data-type]').forEach(c =>
-    c.classList.toggle('active', typeFilters.has(c.dataset.type)));
+  document.querySelectorAll('.chip[data-cat]').forEach(c=>c.classList.toggle('active',catF.has(c.dataset.cat)));
+  document.querySelectorAll('.chip[data-type]').forEach(c=>c.classList.toggle('active',typeF.has(c.dataset.type)));
 }
-function quickCat(cat) {
-  catFilters = new Set([cat]);
-  typeFilters = new Set(['all']);
-  syncChips(); renderPosts();
-}
+function qCat(c){catF=new Set([c]);typeF=new Set(['all']);syncChips();renderPosts();}
+function resetAll(){catF=new Set(['all']);typeF=new Set(['all']);actTag=null;searchQ='';
+  document.getElementById('q').value='';
+  document.getElementById('tag-bar').style.display='none';
+  syncChips();renderPosts();}
 
-// ────────────────────────────────
-//  Tag filter
-// ────────────────────────────────
-function setTag(tag) {
-  activeTag = tag;
-  const bar = document.getElementById('tag-filter-bar');
-  bar.style.display = 'flex';
-  document.getElementById('tag-filter-label').textContent = '#' + tag;
-  renderPosts();
-}
-function clearTag() {
-  activeTag = null;
-  document.getElementById('tag-filter-bar').style.display = 'none';
-  renderPosts();
-}
+// ══════════════════════════════
+//  TAG FILTER
+// ══════════════════════════════
+function setTag(t){actTag=t;document.getElementById('tag-bar').style.display='flex';document.getElementById('tag-lbl').textContent='#'+t;renderPosts();}
+function clearTag(){actTag=null;document.getElementById('tag-bar').style.display='none';renderPosts();}
 
-// ────────────────────────────────
-//  Search
-// ────────────────────────────────
-function onSearch(q) { searchQ = q.toLowerCase(); renderPosts(); }
+// ══════════════════════════════
+//  SEARCH + SORT
+// ══════════════════════════════
+function onQ(v){searchQ=v.toLowerCase();renderPosts();}
+function togSort(){sortDir=sortDir==='newest'?'oldest':'newest';document.getElementById('sort-btn').textContent=sortDir==='newest'?'최신순 ↕':'오래된순 ↕';renderPosts();}
 
-// ────────────────────────────────
-//  Sort
-// ────────────────────────────────
-function toggleSort() {
-  sortOrder = sortOrder === 'newest' ? 'oldest' : 'newest';
-  document.getElementById('sort-btn').textContent = sortOrder === 'newest' ? '최신순 ↕' : '오래된순 ↕';
-  renderPosts();
-}
-
-// ────────────────────────────────
-//  Filter + sort logic
-// ────────────────────────────────
-function getFiltered() {
+// ══════════════════════════════
+//  FILTER LOGIC
+// ══════════════════════════════
+function filtered() {
   return posts
     .filter(p => {
-      if (!catFilters.has('all')  && !catFilters.has(p.category)) return false;
-      if (!typeFilters.has('all') && !typeFilters.has(p.type))     return false;
-      if (activeTag && !(p.tags || []).includes(activeTag))        return false;
-      if (searchQ) {
-        const hay = [p.title, ...(p.tags||[]), p.description||''].join(' ').toLowerCase();
-        if (!hay.includes(searchQ)) return false;
+      if(!catF.has('all')&&!catF.has(p.category)) return false;
+      if(!typeF.has('all')&&!typeF.has(p.type))   return false;
+      if(actTag&&!(p.tags||[]).includes(actTag))   return false;
+      if(searchQ){
+        const h=[p.title,...(p.tags||[]),p.description||''].join(' ').toLowerCase();
+        if(!h.includes(searchQ)) return false;
       }
       return true;
     })
-    .sort((a, b) => {
-      const d = new Date(a.date) - new Date(b.date);
-      return sortOrder === 'newest' ? -d : d;
-    });
+    .sort((a,b)=>{const d=new Date(a.date)-new Date(b.date);return sortDir==='newest'?-d:d;});
 }
 
-// ────────────────────────────────
-//  Helpers
-// ────────────────────────────────
-function esc(s) {
-  return String(s || '')
-    .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
-    .replace(/"/g,'&quot;').replace(/'/g,'&#x27;');
+// ══════════════════════════════
+//  HELPERS
+// ══════════════════════════════
+function e(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+function n(v){return Number(v||0).toLocaleString();}
+function hi(txt, q) {
+  if(!q||!txt) return e(txt||'');
+  const rx=q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
+  return e(txt).replace(new RegExp(rx,'gi'),m=>'<mark>'+m+'</mark>');
 }
-function fmtNum(n) { return Number(n||0).toLocaleString(); }
-function hilight(text, q) {
-  if (!q || !text) return esc(text||'');
-  const e = q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
-  return esc(text).replace(new RegExp(e,'gi'), m => '<mark>' + m + '</mark>');
-}
+function dfmt(d){return d?d.replace(/-/g,'.'):''}
 
-// ────────────────────────────────
-//  Render: stats bar
-// ────────────────────────────────
+// ══════════════════════════════
+//  RENDER: STATS BAR
+// ══════════════════════════════
 function renderStats() {
-  const counts = {};
-  for (const k of Object.keys(CAT)) counts[k] = posts.filter(p=>p.category===k).length;
-  let h = `<span class="stat-item" onclick="resetFilters()" title="전체 보기">
-    전체 <b>${posts.length}개</b></span>`;
-  for (const [k,cfg] of Object.entries(CAT)) {
-    h += `<span class="stat-item" onclick="quickCat('${k}')"
-      style="color:${cfg.color};border-color:${cfg.color}20">
-      ${cfg.label} <b>${counts[k]}</b></span>`;
-  }
-  document.getElementById('stats-bar').innerHTML = h;
+  const cnts={};for(const k of Object.keys(CAT))cnts[k]=posts.filter(p=>p.category===k).length;
+  let h=`<span class="stat-pill stat-pill-all" onclick="resetAll()">전체 <b>${posts.length}개</b></span>`;
+  for(const[k,c] of Object.entries(CAT))
+    h+=`<span class="stat-pill" style="background:${c.statBg};color:${c.statColor};border-color:${c.statBg}" onclick="qCat('${k}')">${c.label} <b>${cnts[k]}</b></span>`;
+  document.getElementById('stats-bar').innerHTML=h;
 }
 
-function resetFilters() {
-  catFilters = new Set(['all']); typeFilters = new Set(['all']);
-  activeTag = null; searchQ = '';
-  document.getElementById('search-input').value = '';
-  document.getElementById('tag-filter-bar').style.display = 'none';
-  syncChips(); renderPosts();
-}
-
-// ────────────────────────────────
-//  Render: post list
-// ────────────────────────────────
-function renderAll() { renderStats(); renderPosts(); }
-
+// ══════════════════════════════
+//  RENDER: POST LIST
+// ══════════════════════════════
 function renderPosts() {
-  _filtered = getFiltered();
-  document.getElementById('result-count').textContent = `총 ${_filtered.length}개`;
-  if (!_filtered.length) {
-    document.getElementById('post-list').innerHTML =
-      '<div style="text-align:center;color:#bbb;padding:48px;font-size:.9rem">검색 결과가 없습니다.</div>';
-    return;
-  }
-  document.getElementById('post-list').innerHTML =
-    _filtered.map((p, i) => buildCard(p, i)).join('');
+  _cur = filtered();
+  document.getElementById('rcnt').textContent=`총 ${_cur.length}개`;
+  if(!_cur.length){document.getElementById('post-list').innerHTML='<div style="text-align:center;color:#bbb;padding:44px;font-size:.88rem">검색 결과가 없습니다.</div>';return;}
+  document.getElementById('post-list').innerHTML=_cur.map((p,i)=>buildCard(p,i)).join('');
 }
 
-function buildCard(p, idx) {
-  const catCfg = CAT[p.category] || { label: p.category||'?', color:'#999' };
-  const typeLabel   = TYPE_LABEL[p.type]     || p.type || '';
-  const schemaLabel = SCHEMA_LABEL[p.schema_type] || p.schema_type || '';
-
-  // Quality
-  const ctaOk  = p.cta_count >= 2;
-  const faqOk  = !!p.has_faq;
-  const charOk = p.char_count >= 1000;
-  const updOk  = !!p.last_updated;
-
-  const ctaQ  = `<span class="q-item ${ctaOk?'ok':'warn'}">${ctaOk?'✓':'🔴'} CTA ${p.cta_count}개</span>`;
-  const faqQ  = `<span class="q-item ${faqOk?'ok':'warn'}">${faqOk?'✓ FAQ':'🔴 FAQ없음'}</span>`;
-  const charQ = `<span class="q-item ${charOk?'ok':'warn'}">${charOk?'':'🔴 '}${fmtNum(p.char_count)}자</span>`;
-  const updQ  = updOk ? '' : `<span class="q-item caution">🟡 last_updated 없음</span>`;
-  const hasIssue = !ctaOk || !faqOk || !charOk || !updOk;
-
-  // Tags
-  const tagsHtml = (p.tags||[]).map(t =>
-    `<span class="tag" onclick="setTag(${JSON.stringify(t)})">#${esc(t)}</span>`
-  ).join('');
-
-  // Dates
-  const dateFmt = (d) => d ? d.replace(/-/g,'.') : '';
-  const dateStr = dateFmt(p.date);
-  const updStr  = dateFmt(p.last_updated);
-
-  const fullUrl = location.origin + p.url;
-
+function buildCard(p, i) {
+  const c = CAT[p.category]||{label:p.category||'?',cls:'',border:'#ddd'};
+  const tl = TYPE_LBL[p.type]||p.type||'';
+  const sl = SCHEMA_LBL[p.schema_type]||p.schema_type||'';
+  const ctaOk=p.cta_count>=2, faqOk=!!p.has_faq, charOk=p.char_count>=1000, updOk=!!p.last_updated;
+  const anyIssue=!ctaOk||!faqOk||!charOk||!updOk;
+  const tagsHtml=(p.tags||[]).map(t=>`<span class="tag" onclick="setTag(${JSON.stringify(t)})">#${e(t)}</span>`).join('');
+  const dateStr=dfmt(p.date), updStr=dfmt(p.last_updated);
   return `
-<div class="post-card" style="border-left-color:${catCfg.color}">
-  <div class="card-top">
-    <div class="card-title-wrap">
-      <span class="card-num">${idx+1}</span>
-      <span class="card-title">${hilight(p.title, searchQ)}${hasIssue?' ⚠️':''}</span>
+<div class="post-card" style="border-left-color:${c.border}">
+  <div class="card-row1">
+    <div style="flex:1">
+      <span class="card-num">${i+1}</span>
+      <span class="card-title">${hi(p.title,searchQ)}${anyIssue?' <span style="font-size:.75rem">⚠️</span>':''}</span>
     </div>
-    <div class="card-date">
-      ${dateStr}
-      ${updStr && updStr !== dateStr ? `<br><span style="color:#ccc;font-size:.68rem">업데이트 ${updStr}</span>` : ''}
-    </div>
+    <div class="card-date">${dateStr}${updStr&&updStr!==dateStr?`<br><span style="color:#d0d0d0;font-size:.66rem">업데이트 ${updStr}</span>`:''}</div>
   </div>
   <div class="card-badges">
-    <span class="badge badge-cat" style="background:${catCfg.color}">${catCfg.label}</span>
-    ${typeLabel   ? `<span class="badge badge-type">${typeLabel}</span>`     : ''}
-    ${schemaLabel ? `<span class="badge badge-schema">${schemaLabel}</span>` : ''}
+    <span class="badge ${c.cls}">${c.label}</span>
+    ${tl?`<span class="badge bt">${tl}</span>`:''}
+    ${sl?`<span class="badge bs">${sl}</span>`:''}
   </div>
-  ${tagsHtml ? `<div class="card-tags">${tagsHtml}</div>` : ''}
-  ${p.description ? `<div class="card-desc">${hilight(p.description, searchQ)}</div>` : ''}
+  ${tagsHtml?`<div class="card-tags">${tagsHtml}</div>`:''}
+  ${p.description?`<div class="card-desc">${hi(p.description,searchQ)}</div>`:''}
   <div class="card-bottom">
-    <div class="card-quality">${ctaQ}${faqQ}${charQ}${updQ}</div>
+    <div class="card-quality">
+      <span class="qi ${ctaOk?'ok':'warn'}">${ctaOk?'✓':'🔴'} CTA ${p.cta_count}개</span>
+      <span class="qi ${faqOk?'ok':'warn'}">${faqOk?'✓ FAQ':'🔴 FAQ없음'}</span>
+      <span class="qi ${charOk?'ok':'warn'}">${charOk?'':'🔴 '}${n(p.char_count)}자</span>
+      ${updOk?'':'<span class="qi caution">🟡 날짜없음</span>'}
+    </div>
     <div class="card-actions">
-      <button class="btn-sm" onclick="copyUrl(${idx})">🔗 링크 복사</button>
-      <button class="btn-sm" onclick="openPost(${idx})">글 열기 →</button>
+      <button class="btn-sm" onclick="copyUrl(${i})">🔗 링크 복사</button>
+      <button class="btn-sm" onclick="_cur[${i}]&&window.open(_cur[${i}].url,'_blank')">글 열기 →</button>
     </div>
   </div>
 </div>`;
 }
 
-function copyUrl(idx) {
-  const url = location.origin + _filtered[idx].url;
-  navigator.clipboard.writeText(url).then(() => showToast('✅ 링크 복사 완료!'));
-}
-function openPost(idx) {
-  window.open(_filtered[idx].url, '_blank');
+function copyUrl(i) {
+  if(!_cur[i]) return;
+  navigator.clipboard.writeText(location.origin+_cur[i].url)
+    .then(()=>toast('✅ 링크 복사 완료!'));
 }
 
-// ────────────────────────────────
-//  Render: health (Tab 3)
-// ────────────────────────────────
+// ══════════════════════════════
+//  RENDER: HEALTH (Tab3)
+// ══════════════════════════════
 function renderHealth() {
-  const total = posts.length, MIN = 15;
-  const totalOk = total >= MIN;
-  let h = '<div class="health-grid">';
-  h += `<div class="health-badge" style="border-left-color:${totalOk?'#059669':'#e53e3e'}">
-    <div class="hb-label">총 글 수 (애드센스 최소 ${MIN}개)</div>
-    <div class="hb-val">${total}개 ${totalOk?'🟢':'🔴'}</div>
-  </div>`;
-  for (const [k,cfg] of Object.entries(CAT)) {
-    const cnt = posts.filter(p=>p.category===k).length, ok = cnt >= 2;
-    h += `<div class="health-badge" style="border-left-color:${cfg.color}">
-      <div class="hb-label">${cfg.label}</div>
-      <div class="hb-val" style="color:${cfg.color}">${cnt}개 ${ok?'🟢':'🔴'}</div>
-    </div>`;
+  const tot=posts.length, MIN=15;
+  let h='<div class="health-grid">';
+  h+=`<div class="health-badge" style="border-left-color:${tot>=MIN?'#388e3c':'#e53935'}">
+    <div class="hb-lbl">총 글 수 (애드센스 최소 ${MIN}개)</div>
+    <div class="hb-val">${tot}개 ${tot>=MIN?'🟢':'🔴'}</div></div>`;
+  for(const[k,c] of Object.entries(CAT)){
+    const cnt=posts.filter(p=>p.category===k).length, ok=cnt>=2;
+    h+=`<div class="health-badge" style="border-left-color:${c.border}">
+      <div class="hb-lbl">${c.label}</div>
+      <div class="hb-val" style="color:${c.border}">${cnt}개 ${ok?'🟢':'🔴'}</div></div>`;
   }
-  h += '</div>';
-  document.getElementById('health-section').innerHTML = h;
+  h+='</div>';
+  document.getElementById('health-wrap').innerHTML=h;
 }
 
-// ────────────────────────────────
-//  Render: keywords (Tab 3)
-// ────────────────────────────────
-function renderKeywords() {
-  const done = new Set(JSON.parse(localStorage.getItem('mg_kw_done')||'[]'));
-  const h = KEYWORDS.map((kw, i) => {
-    const cfg  = CAT[kw.cat]         || { label: kw.cat, color:'#999' };
-    const tlbl = TYPE_LABEL[kw.type] || kw.type;
-    const isDone = done.has(i);
-    const cmd = '"' + kw.title + '" 키워드로 글 써줘';
-
-    // Duplicate check: match first 2 words
-    const kwWords = kw.title.split(' ').slice(0,2).join(' ');
-    const isDup = posts.some(p => p.title.includes(kwWords));
-
+// ══════════════════════════════
+//  RENDER: KEYWORDS (Tab3)
+// ══════════════════════════════
+function renderKw() {
+  const done=new Set(JSON.parse(localStorage.getItem('mg_kw_done')||'[]'));
+  document.getElementById('kw-grid').innerHTML = KEYWORDS.map((kw,i)=>{
+    const c=CAT[kw.cat]||{label:kw.cat,cls:'',border:'#999'};
+    const tl=TYPE_LBL[kw.type]||kw.type;
+    const isDone=done.has(i);
+    const cmd='"'+kw.title+'" 키워드로 글 써줘';
+    const w2=kw.title.split(' ').slice(0,2).join(' ');
+    const isDup=posts.some(p=>p.title.includes(w2));
     return `
-<div class="kw-card${isDone?' done':''}" id="kw${i}">
+<div class="kw-card${isDone?' done':''}">
   <div class="kw-num">#${i+1}</div>
-  <div class="kw-title">${esc(kw.title)}</div>
+  <div class="kw-title">${e(kw.title)}</div>
   <div class="kw-badges">
-    <span class="badge badge-cat" style="background:${cfg.color}">${cfg.label}</span>
-    <span class="badge badge-type">${tlbl}</span>
+    <span class="badge ${c.cls}">${c.label}</span>
+    <span class="badge bt">${tl}</span>
   </div>
-  ${isDup ? `<div class="kw-dup">⚠️ 유사한 글이 이미 존재합니다</div>` : ''}
-  <div class="kw-cmd">${esc(cmd)}</div>
+  ${isDup?'<div class="kw-dup">⚠️ 유사한 글이 이미 있습니다</div>':''}
+  <div class="kw-cmd">${e(cmd)}</div>
   <div class="kw-actions">
     <button class="btn-sm" onclick="copyCmd(${i})">📋 명령어 복사</button>
-    <button class="btn-sm" onclick="toggleDone(${i})" style="${isDone?'color:#059669':''}">
-      ${isDone ? '↩ 되돌리기' : '✅ 작성완료'}
+    <button class="btn-sm" onclick="togDone(${i})" style="${isDone?'color:#388e3c':''}">
+      ${isDone?'↩ 되돌리기':'✅ 작성완료'}
     </button>
   </div>
 </div>`;
   }).join('');
-  document.getElementById('kw-grid').innerHTML = h;
 }
 
 function copyCmd(i) {
-  const cmd = '"' + KEYWORDS[i].title + '" 키워드로 글 써줘';
-  navigator.clipboard.writeText(cmd).then(() => showToast('📋 명령어 복사 완료!'));
+  navigator.clipboard.writeText('"'+KEYWORDS[i].title+'" 키워드로 글 써줘')
+    .then(()=>toast('📋 명령어 복사 완료!'));
 }
-function toggleDone(i) {
-  const done = new Set(JSON.parse(localStorage.getItem('mg_kw_done')||'[]'));
-  done.has(i) ? done.delete(i) : done.add(i);
-  localStorage.setItem('mg_kw_done', JSON.stringify([...done]));
-  renderKeywords();
+function togDone(i) {
+  const d=new Set(JSON.parse(localStorage.getItem('mg_kw_done')||'[]'));
+  d.has(i)?d.delete(i):d.add(i);
+  localStorage.setItem('mg_kw_done',JSON.stringify([...d]));
+  renderKw();
 }
 
-// ────────────────────────────────
-//  Toast
-// ────────────────────────────────
-function showToast(msg) {
-  const t = document.getElementById('toast');
-  t.textContent = msg;
-  t.classList.add('show');
-  clearTimeout(t._tid);
-  t._tid = setTimeout(() => t.classList.remove('show'), 2200);
+// ══════════════════════════════
+//  TOAST
+// ══════════════════════════════
+function toast(msg) {
+  const t=document.getElementById('toast');
+  t.textContent=msg;t.classList.add('show');
+  clearTimeout(t._t);t._t=setTimeout(()=>t.classList.remove('show'),2100);
 }
+{% endraw %}
 </script>
 </body>
 </html>
