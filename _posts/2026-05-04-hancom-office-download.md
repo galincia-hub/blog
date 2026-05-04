@@ -1,7 +1,9 @@
 ---
 title: "한컴오피스 무료 다운로드 방법 (2026년 최신)"
 date: 2026-05-04
+last_updated: 2026-05-04
 category: it
+schema_type: software_faq
 thumbnail: /assets/images/thumbnails/hancom-office-download.png
 description: "한컴오피스 공식 사이트에서 무료 버전을 다운로드하는 방법을 단계별로 안내합니다."
 tags: [한컴오피스, 한글, 다운로드, 무료]

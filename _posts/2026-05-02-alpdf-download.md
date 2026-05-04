@@ -1,7 +1,9 @@
 ---
 title: "알PDF 다운로드 설치 가이드 (무료)"
 date: 2026-05-02
+last_updated: 2026-05-02
 category: it
+schema_type: software_faq
 thumbnail: /assets/images/thumbnails/alpdf-download.png
 description: "알PDF 무료 다운로드 방법과 PDF 변환·편집 주요 기능을 정리했습니다."
 tags: [알PDF, PDF 변환, PDF 편집, 무료 PDF]

@@ -1,7 +1,9 @@
 ---
 title: "곰플레이어 최신버전 설치 방법 (2026년)"
 date: 2026-05-03
+last_updated: 2026-05-03
 category: it
+schema_type: software_faq
 thumbnail: /assets/images/thumbnails/gom-player-install.png
 description: "곰플레이어 공식 다운로드 경로와 설치 시 주의사항을 정리했습니다."
 tags: [곰플레이어, GOM Player, 동영상 플레이어, 다운로드]

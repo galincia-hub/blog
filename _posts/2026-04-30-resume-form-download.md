@@ -1,7 +1,9 @@
 ---
 title: "이력서 양식 무료 다운로드 (Word·한글·PDF)"
 date: 2026-04-30
+last_updated: 2026-04-30
 category: life
+schema_type: howto_faq
 thumbnail: /assets/images/thumbnails/resume-form-download.png
 description: "취업용·경력직·아르바이트 이력서 양식을 Word, 한글, PDF 형식으로 무료 다운로드하는 방법을 안내합니다."
 tags: [이력서, 이력서 양식, 무료 다운로드, 취업]

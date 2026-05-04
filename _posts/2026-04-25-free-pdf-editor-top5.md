@@ -1,7 +1,9 @@
 ---
 title: "무료 PDF 편집 프로그램 BEST 5 비교 (2026년)"
 date: 2026-04-25
+last_updated: 2026-04-25
 category: review
+schema_type: article_faq
 thumbnail: /assets/images/thumbnails/free-pdf-editor-top5.png
 description: "2026년 무료로 사용할 수 있는 PDF 편집 프로그램 5가지를 기능·사용성 기준으로 비교했습니다."
 tags: [PDF 편집, 무료 PDF, PDF 프로그램, PDF 변환]

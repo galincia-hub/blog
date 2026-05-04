@@ -1,7 +1,9 @@
 ---
 title: "세금 환급금 조회 및 신청 방법 (2026년)"
 date: 2026-04-27
+last_updated: 2026-04-27
 category: finance
+schema_type: howto_faq
 thumbnail: /assets/images/thumbnails/tax-refund-guide.png
 description: "국세청 홈택스와 손택스에서 세금 환급금을 조회하고 신청하는 방법을 안내합니다."
 tags: [세금 환급, 환급금 조회, 홈택스, 국세청]
