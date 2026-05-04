@@ -212,26 +212,38 @@ img { max-width: 100%; height: auto; display: block; }
 .cat-review  .category-hero { background: linear-gradient(135deg, #4A148C, #9C27B0); }
 
 /* CTA Button */
-.cta-wrap { margin: 28px 0; text-align: center; }
+.cta-wrap { margin: 32px 0; text-align: center; }
 .cta-btn {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 10px;
-  padding: 16px 32px;
-  border-radius: 10px;
+  padding: 17px 36px;
+  border-radius: 12px;
   font-size: 1.05rem;
   font-weight: 700;
   color: #fff;
   text-decoration: none;
-  transition: filter 0.15s, transform 0.1s;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  transition: filter 0.15s, transform 0.12s, box-shadow 0.15s;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.18);
+  min-width: 240px;
 }
-.cta-btn:hover { filter: brightness(1.1); transform: translateY(-1px); color: #fff; }
-.cta-btn:active { transform: translateY(0); }
-.cta-download { background: linear-gradient(135deg, #1976D2, #1565C0); }
-.cta-link     { background: linear-gradient(135deg, #388E3C, #2E7D32); }
-.cta-phone    { background: linear-gradient(135deg, #F57C00, #E65100); }
-.cta-icon { font-size: 1.2rem; }
+.cta-btn:hover { filter: brightness(1.12); transform: translateY(-2px); box-shadow: 0 6px 18px rgba(0,0,0,0.22); color: #fff; }
+.cta-btn:active { transform: translateY(0); filter: brightness(0.97); }
+
+/* 카테고리별 버튼 색상 */
+.cta-cat-it      { background: linear-gradient(135deg, #2D5016, #4CAF50); }
+.cta-cat-life    { background: linear-gradient(135deg, #1A237E, #2196F3); }
+.cta-cat-finance { background: linear-gradient(135deg, #E65100, #FF9800); }
+.cta-cat-health  { background: linear-gradient(135deg, #880E4F, #E91E63); }
+.cta-cat-review  { background: linear-gradient(135deg, #4A148C, #9C27B0); }
+
+.cta-icon { font-size: 1.15rem; flex-shrink: 0; }
+.cta-text { line-height: 1.2; }
+
+@media (max-width: 600px) {
+  .cta-btn { width: 100%; min-width: unset; padding: 16px 20px; font-size: 1rem; }
+}
 
 /* Footer */
 .site-footer {

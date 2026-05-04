@@ -2,20 +2,15 @@
 {% assign cta_url = include.url %}
 {% assign cta_text = include.text %}
 {% assign cta_affiliate = include.affiliate %}
+{% assign cat = page.category %}
 
-{% if cta_type == 'download' %}
-  {% assign cta_icon = '↓' %}
-  {% assign cta_class = 'cta-download' %}
-{% elsif cta_type == 'phone' %}
-  {% assign cta_icon = '☎' %}
-  {% assign cta_class = 'cta-phone' %}
-{% else %}
-  {% assign cta_icon = '→' %}
-  {% assign cta_class = 'cta-link' %}
-{% endif %}
+{% if cta_type == 'download' %}{% assign cta_icon = '↓' %}
+{% elsif cta_type == 'phone' %}{% assign cta_icon = '📞' %}
+{% elsif cta_type == 'form' %}{% assign cta_icon = '📄' %}
+{% else %}{% assign cta_icon = '→' %}{% endif %}
 
 <div class="cta-wrap">
-  <a class="cta-btn {{ cta_class }}"
+  <a class="cta-btn cta-cat-{{ cat }} cta-{{ cta_type }}"
      href="{{ cta_url }}"
      {% if cta_type != 'phone' %}target="_blank" rel="noopener noreferrer"{% endif %}
      {% if cta_affiliate %}data-affiliate="{{ cta_affiliate }}"{% endif %}>

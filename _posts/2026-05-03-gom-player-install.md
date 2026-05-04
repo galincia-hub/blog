@@ -9,6 +9,8 @@ tags: [곰플레이어, GOM Player, 동영상 플레이어, 다운로드]
 
 곰플레이어(GOM Player)는 국내에서 가장 많이 사용하는 무료 동영상 재생 프로그램입니다. 공식 사이트에서 무료로 다운로드할 수 있으며, 아래에서 설치 과정을 단계별로 안내합니다.
 
+{% include cta-button.html url="https://www.gomlab.com/gomplayerplus/" text="곰플레이어 공식 다운로드" type="download" %}
+
 ## 곰플레이어 사양 및 특징
 
 | 항목 | 내용 |
@@ -17,8 +19,6 @@ tags: [곰플레이어, GOM Player, 동영상 플레이어, 다운로드]
 | 지원 OS | Windows 7/8/10/11 |
 | 지원 형식 | AVI, MP4, MKV, MOV, WMV 등 대부분 형식 |
 | 특징 | 코덱 내장, 자막 자동 검색, 360° VR 재생 |
-
-{% include cta-button.html url="https://www.gom.com/pc/player/gomplayer.html" text="곰플레이어 공식 다운로드" type="download" affiliate="gom" %}
 
 ## 공식 다운로드 방법
 
@@ -55,5 +55,7 @@ A. 네, 최신 버전의 곰플레이어는 4K UHD 영상 재생을 지원합니
 
 **Q. Mac에서 사용할 수 있나요?**
 A. 곰플레이어는 Windows 전용입니다. Mac에서는 VLC 또는 IINA를 추천합니다.
+
+{% include cta-button.html url="https://www.gomlab.com/download/" text="곰플레이어 다운로드 페이지" type="download" %}
 
 공식 사이트에서 다운로드하고, 설치 시 추가 프로그램 설치 여부를 꼭 확인하세요. 설치 후 기본 설정만 잡아두면 별도 코덱 설치 없이 대부분의 동영상을 바로 재생할 수 있습니다.

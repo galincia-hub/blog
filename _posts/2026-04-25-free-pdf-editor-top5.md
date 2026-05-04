@@ -9,6 +9,8 @@ tags: [PDF 편집, 무료 PDF, PDF 프로그램, PDF 변환]
 
 유료 Adobe Acrobat 없이도 PDF를 편집할 수 있는 무료 프로그램이 여럿 있습니다. 기능과 사용 목적에 따라 적합한 도구를 선택하세요.
 
+{% include cta-button.html url="https://altools.co.kr/product/alpdf" text="알PDF 다운로드" type="download" %}
+
 ## 무료 PDF 편집 프로그램 비교
 
 | 프로그램 | 텍스트 편집 | 변환 | 합치기/나누기 | 서명 | 플랫폼 |
@@ -20,8 +22,6 @@ tags: [PDF 편집, 무료 PDF, PDF 프로그램, PDF 변환]
 | Foxit PDF Reader | ✓ (주석) | - | - | ✓ | Win/Mac |
 
 ---
-
-{% include cta-button.html url="https://tools.pdf24.org/ko" text="PDF24 무료로 시작하기" type="link" affiliate="pdf24" %}
 
 ## 1. PDF24 Creator — 가장 기능이 다양한 무료 도구
 
@@ -93,5 +93,7 @@ A. 대부분의 온라인 서비스는 작업 완료 후 서버에서 파일을 
 
 **Q. Mac에서도 사용 가능한 무료 도구는?**
 A. Mac의 기본 미리보기 앱이 기본 편집·서명·합치기를 지원합니다. LibreOffice와 Smallpdf도 Mac에서 사용 가능합니다.
+
+{% include cta-button.html url="https://smallpdf.com/kr" text="SmallPDF 바로가기" type="link" %}
 
 간단한 변환·합치기는 PDF24나 알PDF로, 실제 텍스트 편집이 필요하면 LibreOffice Draw를 추천합니다. 기밀 문서는 온라인 서비스 대신 설치형 프로그램을 이용하세요.
