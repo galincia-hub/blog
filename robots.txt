@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: {{ site.url }}/sitemap.xml
+Sitemap: https://moaguide.co.kr/sitemap.xml

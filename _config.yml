@@ -15,6 +15,9 @@ permalink: /posts/:slug/
 paginate: 12
 paginate_path: "/page:num/"
 
+include:
+  - ads.txt
+
 # Plugins
 plugins:
   - jekyll-sitemap
@@ -28,6 +31,10 @@ exclude:
   - Gemfile.lock
   - scripts/
   - README.md
+  - admin.html
+  - CLAUDE.md
+  - netlify.toml
+  - _docs/
   - "모아가이드_기획서_v1.md"
   - "모아가이드_관리자페이지_기획서_v1.md"
   - node_modules/

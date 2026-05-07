@@ -28,6 +28,6 @@ permalink: /privacy/
 
 ## 5. 문의
 
-개인정보 관련 문의사항은 블로그 소개 페이지를 통해 연락주시기 바랍니다.
+개인정보 관련 문의사항은 moaguide.info@gmail.com 으로 연락주시기 바랍니다.
 
 </div>
